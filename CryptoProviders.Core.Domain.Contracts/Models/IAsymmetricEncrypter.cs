@@ -8,8 +8,8 @@ namespace Reexmonkey.CryptoProviders.Core.Domain.Contracts.Models
 
         byte[] Decrypt(byte[] cipher, string privateKey, string password = null);
 
-        (byte[] cipher, byte[] signature) EncryptKey(byte[] key, string publicKey, Func<string, byte[]> serialize, string privateKey, string password = null);
+        (byte[] cipher, byte[] isignature, byte[] osignature) Encrypt(byte[] data, string publicKey, Func<string, byte[]> serialize, string privateKey, string password = null);
 
-        byte[] DecryptKey<T>(byte[] cipher, byte[] signature, string publicKey, Func<string, byte[]> serialize, string privateKey, string password = null);
+        byte[] Decrypt(byte[] cipher, byte[] osignature, byte[] isignature, string publicKey, Func<string, byte[]> serialize, string privateKey, string password = null);
     }
 }
