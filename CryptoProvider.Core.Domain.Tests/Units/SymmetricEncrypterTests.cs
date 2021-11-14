@@ -117,7 +117,7 @@ namespace Reexmonkey.CryptoProvider.Core.Domain.Tests.Units
         public async Task ShouldEncryptPlaintextAsync(ISymmetricEncrypter encrypter)
         {
             //arrange
-            const string plaintext = "The quick brown fox jumps over the lazy dogs";
+            const string plaintext = "Benjamín pidió una bebida de kiwi y fresa. Noé, sin vergüenza, la más exquisita champaña del menú";
             byte[] serialize(string value) => fixture.Encoding.GetBytes(value);
             var secret = serialize(fixture.Secret);
 
@@ -135,7 +135,7 @@ namespace Reexmonkey.CryptoProvider.Core.Domain.Tests.Units
         public async Task ShouldDecryptPlaintextAsync(ISymmetricEncrypter encrypter)
         {
             //arrange
-            const string plaintext = "Portez ce vieux whisky au juge blond qui fume";
+            const string plaintext = "Victor jagt zwölf Boxkämpfer quer über den großen Sylter Deich";
             byte[] serialize(string value) => fixture.Encoding.GetBytes(value);
             string deserialize(byte[] value) => fixture.Encoding.GetString(value);
 
