@@ -148,6 +148,8 @@ namespace Reexmonkey.CryptoProvider.Core.Domain.Tests.Units
             //assert
             Assert.NotNull(cipher);
             Assert.Equal(plaintext, result);
+            console.WriteLine($"plaintext: {plaintext}");
+            console.WriteLine($"ciphertext: {fixture.ToBase64String(cipher)}");
         }
 
         [Theory]
