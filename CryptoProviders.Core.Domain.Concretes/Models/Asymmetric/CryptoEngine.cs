@@ -47,34 +47,16 @@ namespace Reexmonkey.CryptoProviders.Core.Domain.Concretes.Models.Asymmetric
             return valid ? data : throw new InvalidOperationException("´Verification of data signature failed.");
         }
 
-        public byte[] Encrypt(byte[] data, string publicKey)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract byte[] Encrypt(byte[] data, string publicKey);
 
-        public byte[] Decrypt(byte[] cipher, string privateKey, string password = null)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract byte[] Decrypt(byte[] cipher, string privateKey, string password = null);
 
-        public byte[] Sign(byte[] data, string privateKey, string password = null)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract byte[] Sign(byte[] data, string privateKey, string password = null);
 
-        public bool Verify(byte[] data, byte[] signature, string publicKey)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool Verify(byte[] data, byte[] signature, string publicKey);
 
-        public Task<byte[]> SignAsync(byte[] data, string privateKey, string password = null, CancellationToken token = default)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Task<byte[]> SignAsync(byte[] data, string privateKey, string password = null, CancellationToken token = default);
 
-        public Task<bool> VerifyAsync(byte[] data, byte[] signature, string publicKey, CancellationToken token = default)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Task<bool> VerifyAsync(byte[] data, byte[] signature, string publicKey, CancellationToken token = default);
     }
 }

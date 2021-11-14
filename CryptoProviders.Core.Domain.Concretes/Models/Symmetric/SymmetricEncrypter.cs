@@ -72,9 +72,18 @@ namespace Reexmonkey.CryptoProviders.Core.Domain.Concretes.Models.Symmetric
             using var transform = algorithm.CreateDecryptor(key, iv);
             using var mstream = new MemoryStream(cipher);
             using var cstream = new CryptoStream(mstream, transform, CryptoStreamMode.Read);
-            var plain = new byte[cipher.Length];
-            var count = cstream.Read(plain, 0, plain.Length);
-            return (plain, count);
+            var buffer = new byte[cipher.Length];
+            var pending = cipher.Length;
+            var received = 0;
+            do
+            {
+                var read = cstream.Read(buffer, received, pending);
+                if (read == 0) break;
+                received += read;
+                pending -= read;
+            } while (pending > 0);
+
+            return (buffer, received);
         }
 
         public T Decrypt<T>(byte[] cipher, Func<byte[], T> deserialize, byte[] key)
@@ -133,9 +142,18 @@ namespace Reexmonkey.CryptoProviders.Core.Domain.Concretes.Models.Symmetric
             using var transform = algorithm.CreateDecryptor(key, iv);
             using var mstream = new MemoryStream(cipher);
             using var cstream = new CryptoStream(mstream, transform, CryptoStreamMode.Read);
-            var plain = new byte[cipher.Length];
-            var count = await cstream.ReadAsync(plain.AsMemory(0, plain.Length), token).ConfigureAwait(false);
-            return (plain, count);
+            var buffer = new byte[cipher.Length];
+            var pending = cipher.Length;
+            var received = 0;
+            do
+            {
+                var read = await cstream.ReadAsync(buffer, received, pending, token).ConfigureAwait(false);
+                if (read == 0) break;
+                received += read;
+                pending -= read;
+            } while (pending > 0);
+
+            return (buffer, received);
         }
 
         public async Task<T> DecryptAsync<T>(byte[] cipher, Func<byte[], T> deserialize, byte[] key, CancellationToken token = default)

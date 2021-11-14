@@ -23,7 +23,6 @@ namespace Reexmonkey.CryptoProvider.Core.Domain.Tests.Units
 
         public static IEnumerable<object[]> GetEncrypters()
         {
-            yield return new object[] { new RijndaelEncrypter() };
             yield return new object[] { new AesEncrypter() };
             yield return new object[] { new DesEncrypter() };
             yield return new object[] { new Rc2Encrypter() };
